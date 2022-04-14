@@ -4,25 +4,25 @@ import {useParams} from 'react-router-dom';
 
 const ProductDetail = (props) => {
     const {id} = useParams();
-    const [product, setProduct] = useState({});
+    const [oneProduct, setOneProduct] = useState({});
 
     useEffect(() => {
         axios
             .get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
                 console.log(res.data);
-                setProduct(res.data);
+                setOneProduct(res.data);
             })
             .catch((err) => console.log(err))
-    }, [id])
+    }, [id]);
 
     return (
         <div>
-            <h3>{product.title}</h3>
-            <p>Price: ${product.price}</p>
-            <p>Description: {product.description}</p>
+            <h3>{oneProduct.title}</h3>
+            <p>Price: ${oneProduct.price}</p>
+            <p>Description: {oneProduct.description}</p>
         </div>
-    )
-}
+    );
+};
 
 export default ProductDetail;

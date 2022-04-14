@@ -4,12 +4,12 @@ import axios from 'axios';
 const ProductForm = (props) => {
     const {productList, setProductList} = props;
     const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000//api/products', {
+        axios.post('http://localhost:8000/api/products', {
             title: title,
             price: price,
             description: description
@@ -19,7 +19,7 @@ const ProductForm = (props) => {
                 console.log(res.data);
                 setProductList([...productList, res.data]);
                 setTitle("");
-                setPrice(0);
+                setPrice("");
                 setDescription("");
             })
             .catch((err) => console.log(err));
@@ -31,15 +31,30 @@ const ProductForm = (props) => {
             <form onSubmit={onSubmitHandler}>
                 <div>
                     <label>Title</label>
-                    <input type="text" onChange={(e) => setTitle(e.target.value)} value={title} name="title" />
+                    <input 
+                        onChange={(e) => setTitle(e.target.value)} 
+                        value={title} 
+                        name="title" 
+                        type="text" 
+                    />
                 </div>
                 <div>
                     <label>Price</label>
-                    <input type="number" onChange={(e) => setPrice(e.target.value)} value={price} name="price" />
+                    <input 
+                        onChange={(e) => setPrice(e.target.value)} 
+                        value={price} 
+                        name="price" 
+                        type="number" 
+                    />
                 </div>
                 <div>
                     <label>Description</label>
-                    <input type="text" onChange={(e) => setDescription(e.target.value)} value={description} name="description" />
+                    <input 
+                        onChange={(e) => setDescription(e.target.value)} 
+                        value={description} 
+                        name="description" 
+                        type="text" 
+                    />
                 </div>
                 <input type="submit" value="Create" />
             </form>
