@@ -1,14 +1,13 @@
+//gets all of the products
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-const ProductList = (props) => {
+const AllProducts = (props) => {
     const {productList, setProductList} = props;
 
     useEffect(() => {
-        //findAllProducts - from controllers on server side
-        axios
-            .get("http://localhost:8000/api/products")
+        axios.get("http://localhost:8000/api/products")
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
@@ -33,4 +32,4 @@ const ProductList = (props) => {
     );
 };
 
-export default ProductList;
+export default AllProducts;
