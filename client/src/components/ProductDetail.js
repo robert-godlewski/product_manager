@@ -7,9 +7,12 @@ const ProductDetail = (props) => {
     const [oneProduct, setOneProduct] = useState({});
 
     useEffect(() => {
+        //findOneProduct
+        //Check out the get link around the id variable
         axios
             .get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
+                console.log(res);
                 console.log(res.data);
                 setOneProduct(res.data);
             })
@@ -18,6 +21,7 @@ const ProductDetail = (props) => {
 
     return (
         <div>
+            <p>hello</p>
             <h3>{oneProduct.title}</h3>
             <p>Price: ${oneProduct.price}</p>
             <p>Description: {oneProduct.description}</p>

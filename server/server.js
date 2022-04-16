@@ -13,5 +13,9 @@ app.use(
 
 require('./config/mongoose.config');
 require('./routes/product.routes')(app);
+/* Long hand version of the previous line:
+const productRoutes = require('./routes/product.routes');
+productRoutes(app);
+*/
 
 app.listen(8000, () => console.log("Listening on port 8000."));

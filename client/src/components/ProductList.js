@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,12 +6,15 @@ const ProductList = (props) => {
     const {productList, setProductList} = props;
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/products")
+        //findAllProducts - from controllers on server side
+        axios
+            .get("http://localhost:8000/api/products")
             .then((res) => {
+                console.log(res);
                 console.log(res.data);
                 setProductList(res.data);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {console.log(err)});
     }, []);
 
     return (
@@ -19,7 +22,7 @@ const ProductList = (props) => {
             <h3>Products List</h3>
             {
                 productList.map((product, index) => (
-                    <div key={index}>
+                    <div key={product._id}>
                         <Link to={`/products/${product._id}`}>
                             {product.title}
                         </Link>
