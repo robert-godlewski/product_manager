@@ -8,7 +8,6 @@ const ProductDetail = (props) => {
 
     useEffect(() => {
         //findOneProduct
-        //Check out the get link around the id variable
         axios
             .get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
@@ -21,7 +20,6 @@ const ProductDetail = (props) => {
 
     return (
         <div>
-            <p>hello</p>
             <h3>{oneProduct.title}</h3>
             <p>Price: ${oneProduct.price}</p>
             <p>Description: {oneProduct.description}</p>

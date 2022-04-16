@@ -2,8 +2,8 @@ const Product = require("../models/product.model");
 
 module.exports = {
     findAllProducts: (req, res) => {
-        console.log(`findAllProducts in data: ${req.body}`);
-        Product.find()
+        //console.log(`findAllProducts in data: ${req.body}`);
+        Product.find({})
             .then((allProducts) => {
                 console.log(allProducts);
                 res.json(allProducts);
@@ -17,8 +17,8 @@ module.exports = {
             });
     },
     findOneProduct: (req, res) => {
-        console.log(`findOneProduct in data: ${req.body}`);
-        Product.find({_id: req.params.id})
+        //console.log(`findOneProduct in data: ${req.body}`);
+        Product.findOne({_id: req.params.id})
             .then((oneProduct) => {
                 console.log(oneProduct);
                 res.json(oneProduct);
@@ -32,7 +32,7 @@ module.exports = {
             });
     },
     createProduct: (req, res) => {
-        console.log(`createProduct in data: ${req.body}`);
+        //console.log(`createProduct in data: ${req.body}`);
         Product.create(req.body)
             .then((newProduct) => {
                 console.log(newProduct);

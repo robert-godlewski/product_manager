@@ -1,6 +1,8 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from './views/Main';
 import ProductDetail from './components/ProductDetail';
+//import ProductForm from './components/ProductForm';
+//import ProductList from './components/ProductList';
 import './App.css';
 
 function App() {
@@ -8,8 +10,8 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route element={<Main/>} path="/" />
-          <Route element={<ProductDetail/>} path="/products/:id"/>
+          <Route path="/" element={<Main />} />
+          <Route path="/products/:id" element={<ProductDetail/>} />
         </Routes>
       </div>
     </BrowserRouter>
