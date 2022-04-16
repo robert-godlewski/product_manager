@@ -1,39 +1,47 @@
-//creates products
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {useParams, useNavigate} from 'react-router-dom';
 
-const CreateProduct = (props) => {
-    const {productList, setProductList} = props;
+const UpdateProduct = (props) => {
+    const {id} = useParams();
+    const navigate = useNavigate();
 
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState();
+    const [price, setPrice] = useState();
+    const [description, setDescription] = useState();
 
-    const onSubmitHandler = (e) => {
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/products/${id}`)
+            .then((res) => {
+                console.log(res);
+                console.log(res.data);
+                setTitle(res.data.title);
+                setPrice(res.data.price);
+                setDescription(res.data.description);
+            })
+            .catch((err) => console.log(err))
+    }, [])
+
+    const updateProduct = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products', {
-            title, 
-            price, 
+        axios.put(`http://localhost:8000/api/products/${id}`, {
+            title,
+            price,
             description
         })
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
-                //rerender the frontend with the new product
-                setProductList([...productList, res.data]);
-                //Clearing all fields in the form
-                setTitle("");
-                setPrice("");
-                setDescription("");
+                //route us back to Main.js
+                navigate("/");
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
     }
 
     return (
         <div>
-            <h1>Product Manager</h1>
-            <form onSubmit={onSubmitHandler}>
-                <div>
+            <form onSubmit={updateProduct}>
+            <div>
                     <label>Title</label>
                     <input 
                         onChange={(e) => setTitle(e.target.value)} 
@@ -60,10 +68,10 @@ const CreateProduct = (props) => {
                         type="text" 
                     />
                 </div>
-                <input type="submit" value="Create" />
+                <input type="submit" />
             </form>
         </div>
     )
-}
+};
 
-export default CreateProduct;
+export default UpdateProduct;

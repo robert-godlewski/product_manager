@@ -22,9 +22,9 @@ const AllProducts = (props) => {
             {
                 productList.map((product, index) => (
                     <div key={product._id}>
-                        <Link to={`/products/${product._id}`}>
-                            {product.title}
-                        </Link>
+                        <span>{product.title}: </span>
+                        <Link to={`/products/get/${product._id}`}>view</Link> | 
+                        <Link to={`/products/edit/${product._id}`}>edit</Link>
                     </div>
                 ))
             }
