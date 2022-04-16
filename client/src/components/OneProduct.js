@@ -1,15 +1,14 @@
+//get one product
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 
-const ProductDetail = (props) => {
+const OneProduct = (props) => {
     const {id} = useParams();
     const [oneProduct, setOneProduct] = useState({});
 
     useEffect(() => {
-        //findOneProduct
-        axios
-            .get(`http://localhost:8000/api/products/${id}`)
+        axios.get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
@@ -27,4 +26,4 @@ const ProductDetail = (props) => {
     );
 };
 
-export default ProductDetail;
+export default OneProduct;

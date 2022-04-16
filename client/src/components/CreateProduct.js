@@ -1,7 +1,8 @@
+//creates products
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const ProductForm = (props) => {
+const CreateProduct = (props) => {
     const {productList, setProductList} = props;
 
     const [title, setTitle] = useState("");
@@ -10,11 +11,11 @@ const ProductForm = (props) => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        //createProduct
         axios.post('http://localhost:8000/api/products', {title, price, description})
             .then((res) => {
                 console.log(res);
                 console.log(res.data);
+                //rerender the frontend with the new product
                 setProductList([...productList, res.data]);
                 //Clearing all fields in the form
                 setTitle("");
@@ -61,4 +62,4 @@ const ProductForm = (props) => {
     )
 }
 
-export default ProductForm;
+export default CreateProduct;
