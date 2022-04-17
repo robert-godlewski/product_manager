@@ -2,7 +2,6 @@ const Product = require("../models/product.model");
 
 module.exports = {
     findAllProducts: (req, res) => {
-        //console.log(`findAllProducts in data: ${req.body}`);
         Product.find({})
             .then((allProducts) => {
                 console.log(allProducts);
@@ -16,8 +15,8 @@ module.exports = {
                 });
             });
     },
+
     findOneProduct: (req, res) => {
-        //console.log(`findOneProduct in data: ${req.body}`);
         Product.findOne({_id: req.params.id})
             .then((oneProduct) => {
                 console.log(oneProduct);
@@ -31,8 +30,8 @@ module.exports = {
                 });
             });
     },
+
     createProduct: (req, res) => {
-        //console.log(`createProduct in data: ${req.body}`);
         Product.create(req.body)
             .then((newProduct) => {
                 console.log(newProduct);
@@ -40,10 +39,45 @@ module.exports = {
             })
             .catch((err) => {
                 console.log(`createProduct failed: ${err}`);
-                /* 400 status means that the client is talking 
+                res.json({
+                    message: "Something went wrong in createProduct",
+                    error: err
+                });
+                /* For Falidations: copy for both create and update functions
+                400 status means that the client is talking 
                 to the server but not giving in good data. 
                 Returns all of the validation errors.*/
-                res.status(400).json(err);
+                //res.status(400).json(err);
             });
     },
+
+    updateProduct: (req, res) => {
+        Product.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+            .then((updateProduct) => {
+                console.log(updateProduct);
+                res.json(updateProduct);
+            })
+            .catch((err) => {
+                console.log(`createProduct failed: ${err}`);
+                res.json({
+                    message: "Something went wrong in createProduct",
+                    error: err
+                });
+            });
+    },
+    
+    deleteProduct: (req, res) => {
+        Product.deleteOne({_id: req.params.id})
+            .then((deleteConfirm) => {
+                console.log(deleteConfirm);
+                res.json(deleteConfirm);
+            })
+            .catch((err) => {
+                console.log(`createProduct failed: ${err}`);
+                res.json({
+                    message: "Something went wrong in createProduct",
+                    error: err
+                });
+            });
+    }
 };
